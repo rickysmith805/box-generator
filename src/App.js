@@ -1,23 +1,29 @@
-import logo from './logo.svg';
+import {useState} from 'react';
+import BoxForm from './components/BoxForm';
 import './App.css';
+import 'bootstrap/dist/css/bootstrap.min.css';
 
 function App() {
+
+  const [boxes, setBoxes] = useState([])
+
+  const handleAddBox = (e, color) =>{
+    e.preventDefault()
+    setBoxes(
+      [...boxes, color]
+    )
+  }
   return (
     <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
+      <BoxForm 
+      handleAddBox = {handleAddBox}
+      
+    />
+    <div className="d-flex justify-content-around border p-5">
+      {
+        boxes.map((color,i) => <div style={{backgroundColor: color, width:"200px", height:"200px"}}> </div>)
+      }
+  </div>
     </div>
   );
 }
